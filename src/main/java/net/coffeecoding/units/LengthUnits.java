@@ -1,8 +1,8 @@
 package net.coffeecoding.units;
 
 public enum LengthUnits   {
-    METR(1),
-    KILOMETR(1000),
+    METER(1),
+    KILOMETER(1000),
     MILE(1600);
 
     private double value;

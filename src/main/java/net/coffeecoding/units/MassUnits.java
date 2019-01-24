@@ -5,7 +5,7 @@ public enum MassUnits {
     CETNAR(50),
     TON(1000),
     DRACHMA(0.0043),
-    OUND(0.45359237),
+    POUND(0.45359237),
     GRAN(0.00006479891),
     CARAT(0.0002),
     QUINTAL(100),

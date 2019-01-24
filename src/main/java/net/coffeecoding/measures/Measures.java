@@ -41,7 +41,7 @@ public enum Measures {
 
         @Override
         public Enum getDefaultValue() {
-            return LengthUnits.METR;
+            return LengthUnits.METER;
         }
     };
 

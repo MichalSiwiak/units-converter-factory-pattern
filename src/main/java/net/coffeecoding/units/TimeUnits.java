@@ -5,7 +5,7 @@ public enum TimeUnits {
     DAY(24 * 60 * 60),
     YEAR(DAY.getValue() * 365),
     MINUTE(60),
-    SEKUNDA(1);
+    SECOND(1);
 
     private double value;
 

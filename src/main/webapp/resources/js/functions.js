@@ -1,7 +1,7 @@
-var app = angular.module("UserManagement", []);
+var app = angular.module("UnitManagement", []);
 
 //Controller Part
-app.controller("UserManagementController", function ($scope, $http) {
+app.controller("UnitManagementController", function ($scope, $http) {
 
     //Initialize page with default data which is blank in this example
 
@@ -12,7 +12,7 @@ app.controller("UserManagementController", function ($scope, $http) {
     $scope.unitsOfMeasure = [];
     $scope.calculatedUnitsOfMeasure = [];
 
-    //Now load the data from server
+    //load the data from server
     _refreshPageData();
 
     function _refreshPageData() {
@@ -64,80 +64,12 @@ app.controller("UserManagementController", function ($scope, $http) {
             headers: {
                 'Content-Type': 'text/plain'
             }
-        }).then(_refreshPageData, _error, console.log("cokolwiek"));
+        }).then(_refreshPageData, _error);
     };
 
-    /* function _getOtherUnits() {
-         $http({
-             method: 'GET',
-             url: '/units/other-units'
-         }).then(function successCallback(response) {
-             $scope.otherUnits = response.data;
-         }, function errorCallback(response) {
-             console.log(response.statusText);
-             _refreshPageData();
-
-         });
-     }
-
-     function _getAllMeasures() {
-         $http({
-             method: 'GET',
-             url: '/units/measures'
-         }).then(function successCallback(response) {
-             $scope.measures = response.data;
-         }, function errorCallback(response) {
-             console.log(response.statusText);
-             _getDefaultUnit();
-             _getAllUnits();
-         });
-     }
-
-     function _getAllUnits() {
-         $http({
-             method: 'GET',
-             url: '/units/units-list'
-         }).then(function successCallback(response) {
-             $scope.units = response.data;
-         }, function errorCallback(response) {
-             console.log(response.statusText);
-         });
-     }
-
-     function _getDefaultUnit() {
-         $http({
-             method: 'GET',
-             url: '/units/default-unit'
-         }).then(function successCallback(response) {
-             $scope.selectedUnit = response.data;
-         }, function errorCallback(response) {
-             console.log(response.statusText);
-         });
-     }
-
-
-
-     $scope.submitUnit = function (selectedUnit) {
-         $http({
-             method: "POST",
-             url: '/units/unit',
-             data: selectedUnit,
-             headers: {
-                 'Content-Type': 'text/plain'
-             }
-         }).then(_getOtherUnits(), _error);
-     };
-
-     function _refreshPageData() {
-         _getAllMeasures();
-         _getDefaultUnit();
-         _getAllUnits();
-         _getOtherUnits();
-     }*/
 
     function _error(response) {
         console.log(response.statusText);
     }
-
 
 });
