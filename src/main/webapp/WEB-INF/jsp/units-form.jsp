@@ -36,10 +36,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
 
 
-<body ng-app="UnitManagement" ng-controller="UnitManagementController" class="bg-light text-dark" style="">
+<oter ng-app="UnitManagement" ng-controller="UnitManagementController" class="bg-light text-dark" style="">
 
 <div id="wrap">
-    <div id="main" class="clear-top">
+    <div id="main" class="clear-top mb-4" >
 
 
         <div class="collapse" id="navbarHeader">
@@ -166,7 +166,7 @@
             </div>
         </div>
 
-fff
+
     </div>
 </div>
 
