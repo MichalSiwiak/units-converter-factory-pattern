@@ -18,7 +18,7 @@ app.controller("UnitManagementController", function ($scope, $http) {
     function _refreshPageData() {
         $http({
             method: 'GET',
-            url: '/units/unit-model'
+            url: '/converter/unit-model'
         }).then(function successCallback(response) {
 
             $scope.quantity = response.data.quantity;
@@ -37,7 +37,7 @@ app.controller("UnitManagementController", function ($scope, $http) {
     $scope.submitMeasure = function (option) {
         $http({
             method: "POST",
-            url: '/units/measure',
+            url: '/converter/measure',
             data: option,
             headers: {
                 'Content-Type': 'text/plain'
@@ -48,7 +48,7 @@ app.controller("UnitManagementController", function ($scope, $http) {
     $scope.submitUnit = function (option) {
         $http({
             method: "POST",
-            url: '/units/unit',
+            url: '/converter/unit',
             data: option,
             headers: {
                 'Content-Type': 'text/plain'
@@ -59,7 +59,7 @@ app.controller("UnitManagementController", function ($scope, $http) {
     $scope.submitQuantity = function () {
         $http({
             method: "POST",
-            url: '/units/quantity',
+            url: '/converter/quantity',
             data: $scope.quantity,
             headers: {
                 'Content-Type': 'text/plain'

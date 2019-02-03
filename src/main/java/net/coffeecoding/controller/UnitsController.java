@@ -21,6 +21,11 @@ public class UnitsController {
         unitFactory = new UnitFactory(5, "Mass", "TON");
     }
 
+    @GetMapping("/error")
+    public String showErrorPage() {
+        return "error-page";
+    }
+
     @GetMapping("/demo")
     public String showMainPage() {
         return "units-form";
