@@ -154,7 +154,7 @@
                             <tbody>
                             <tr ng-repeat="(name, value) in calculatedUnitsOfMeasure">
                                 <td class="text-center">{{name}}</td>
-                                <td class="text-right">{{value}}</td>
+                                <td class="text-right">{{value | number : fractionSize}}</td>
                             </tr>
                             </tbody>
                         </table>
