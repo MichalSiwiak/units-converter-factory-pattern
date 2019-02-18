@@ -1,8 +1,6 @@
 package net.coffeecoding.measures;
 
-import net.coffeecoding.units.LengthUnits;
-import net.coffeecoding.units.MassUnits;
-import net.coffeecoding.units.TimeUnits;
+import net.coffeecoding.units.*;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -30,6 +28,42 @@ public enum Measures {
         @Override
         public Enum getDefaultValue() {
             return TimeUnits.HOUR;
+        }
+    },
+
+    Volume() {
+        @Override
+        public Map<String, Double> getValuesOfUnits() {
+            return Arrays.asList(VolumeUnits.values()).stream().collect(Collectors.toMap(VolumeUnits::toString, VolumeUnits::getValue));
+        }
+
+        @Override
+        public Enum getDefaultValue() {
+            return VolumeUnits.CUBIC_METER;
+        }
+    },
+
+    Temperature() {
+        @Override
+        public Map<String, Double> getValuesOfUnits() {
+            return Arrays.asList(TemperatureUnits.values()).stream().collect(Collectors.toMap(TemperatureUnits::toString, TemperatureUnits::getValue));
+        }
+
+        @Override
+        public Enum getDefaultValue() {
+            return TemperatureUnits.CELSIUS;
+        }
+    },
+
+    Area() {
+        @Override
+        public Map<String, Double> getValuesOfUnits() {
+            return Arrays.asList(AreaUnits.values()).stream().collect(Collectors.toMap(AreaUnits::toString, AreaUnits::getValue));
+        }
+
+        @Override
+        public Enum getDefaultValue() {
+            return AreaUnits.SQUARE_METER;
         }
     },
 

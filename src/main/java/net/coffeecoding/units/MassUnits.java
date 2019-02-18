@@ -1,7 +1,10 @@
 package net.coffeecoding.units;
 
 public enum MassUnits {
+
     KILOGRAM(1),
+    GRAM(0.001),
+    MILLIGRAM(0.000001),
     CETNAR(50),
     TON(1000),
     DRACHMA(0.0043),

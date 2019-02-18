@@ -1,0 +1,38 @@
+package net.coffeecoding.units;
+
+public enum VolumeUnits {
+
+    CUBIC_METER(1),
+    CUBIC_KILOMETER(1000000000),
+    CUBIC_CENTIMETER(0.000001),
+    CUBIC_MILLIMETER(0.000000001),
+    LITER(0.001),
+    MILLILITER(0.000001),
+    US_GALLON(0.00378541),
+    US_QUART(0.0009463525),
+    US_PINT(0.0004731763),
+    US_CUP(0.0002365881),
+    US_FLUID_OUNCE(0.0000295735),
+    US_TABLE_SPOON(0.0000147868),
+    US_TEA_SPOON(0.0000049289),
+    IMPERIAL_GALLON(0.00454609),
+    IMPERIAL_QUART(0.0011365225),
+    IMPERIAL_PINT(0.0005682613),
+    IMPERIAL_FLUID_OUNCE(0.0000284131),
+    IMPERIAL_TABLE_SPOON(0.0000177582),
+    IMPERIAL_TEAvSPOON(0.0000059194),
+    CUBIC_MILE(4168180000L),
+    CUBIC_YARD(0.764554858),
+    CUBIC_FOOT(0.0283168466),
+    CUBIC_INCH(0.0000163871);
+
+    private double value;
+
+    VolumeUnits(double value) {
+        this.value = value;
+    }
+
+    public double getValue() {
+        return value;
+    }
+}
