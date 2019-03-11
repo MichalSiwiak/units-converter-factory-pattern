@@ -90,7 +90,7 @@
 
     <!-- Add support for Maven WAR Plugin -->
     <build>
-        <finalName>units-converter-factory-pattern</finalName>
+        <finalName>converter</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
