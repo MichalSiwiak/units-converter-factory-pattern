@@ -43,18 +43,6 @@ public enum Measures {
         }
     },
 
-    Temperature() {
-        @Override
-        public Map<String, Double> getValuesOfUnits() {
-            return Arrays.asList(TemperatureUnits.values()).stream().collect(Collectors.toMap(TemperatureUnits::toString, TemperatureUnits::getValue));
-        }
-
-        @Override
-        public Enum getDefaultValue() {
-            return TemperatureUnits.CELSIUS;
-        }
-    },
-
     Area() {
         @Override
         public Map<String, Double> getValuesOfUnits() {

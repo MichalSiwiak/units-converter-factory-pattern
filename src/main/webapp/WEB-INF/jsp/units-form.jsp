@@ -107,7 +107,8 @@
                 <div class="row">
                     <div class="col-md-0 text-left">
                         <h1 class="text-left text-primary">Units Converter</h1>
-                        <p class="lead text-left"></p>
+                        <p class="lead text-left">Unit converter application easy to maintain and extend - an example of
+                            using a factory pattern.</p>
                     </div>
                 </div>
             </div>

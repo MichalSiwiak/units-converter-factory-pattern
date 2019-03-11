@@ -78,9 +78,9 @@
                     CODE
                 </text>
                 </a>
-                <a href="${pageContext.request.contextPath}" class="navbar-brand d-flex align-items-center"><i
-                        class="fa fa-file-text fa-2x fa-fw lead d-inline-block" aria-hidden="true"></i>&nbsp;&nbsp;<text
-                        class="">DESCRIPTION
+                <a href="${pageContext.request.contextPath}/demo" class="navbar-brand d-flex align-items-center"><i
+                        class="fa fa-desktop fa-2x fa-fw lead d-inline-block" aria-hidden="true"></i>&nbsp;&nbsp;<text
+                        class="">DEMO VIEW
                 </text>
                 </a>
                 <a href="https://coffeecoding.net/resources/img/cv_msiwiak.pdf" target="_blank"
@@ -100,24 +100,312 @@
         </div>
 
 
-        <div class="text-center py-4 bg-secondary"
-             style="	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-0 text-left">
-                        <h1 class="text-left text-primary">Units Converter</h1>
-                        <p class="lead text-left"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <div class="py-5">
             <div class="container">
-                <h2>Project Description</h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Units Converter</h1>
+                        <hr>
+                        <h5>This application presents simple implementation of unit converter. The application uses a
+                            modified factory pattern - we can easily add more units and measures.<br></h5>
+                        <h5><b>Back End: </b>Java, Spring MVC.</h5>
+                        <h5><b>Front End: </b>AngularJS, HTML, CSS.</h5>
+                        <h5>To run application: git clone
+                            https://github.com/MichalSiwiak/units-converter-factory-pattern.git,
+                            upload and run application using tomcat application server or similar.</h5>
+                        <h5>Demo View: <a href="https://coffeecoding.net/converter/demo">https://coffeecoding.net/converter/demo</a>
+                        </h5>
+                        <h5>Measures enum class:</h5>
+                    </div>
+                </div>
+                <pre><code class="java">
+package net.coffeecoding.measures;
+
+import net.coffeecoding.units.*;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public enum Measures {
+
+    Mass() {
+        @Override
+        public Map<String, Double> getValuesOfUnits() {
+            return Arrays.asList(MassUnits.values()).stream().collect(Collectors.toMap(MassUnits::toString, MassUnits::getValue));
+        }
+
+        @Override
+        public Enum getDefaultValue() {
+            return MassUnits.KILOGRAM;
+        }
+    },
+    Time() {
+        @Override
+        public Map<String, Double> getValuesOfUnits() {
+            return Arrays.asList(TimeUnits.values()).stream().collect(Collectors.toMap(TimeUnits::toString, TimeUnits::getValue));
+        }
+
+        @Override
+        public Enum getDefaultValue() {
+            return TimeUnits.HOUR;
+        }
+    },
+
+    Volume() {
+        @Override
+        public Map<String, Double> getValuesOfUnits() {
+            return Arrays.asList(VolumeUnits.values()).stream().collect(Collectors.toMap(VolumeUnits::toString, VolumeUnits::getValue));
+        }
+
+        @Override
+        public Enum getDefaultValue() {
+            return VolumeUnits.CUBIC_METER;
+        }
+    },
+
+    Area() {
+        @Override
+        public Map<String, Double> getValuesOfUnits() {
+            return Arrays.asList(AreaUnits.values()).stream().collect(Collectors.toMap(AreaUnits::toString, AreaUnits::getValue));
+        }
+
+        @Override
+        public Enum getDefaultValue() {
+            return AreaUnits.SQUARE_METER;
+        }
+    },
+
+    Length() {
+        @Override
+        public Map<String, Double> getValuesOfUnits() {
+            return Arrays.asList(LengthUnits.values()).stream().collect(Collectors.toMap(LengthUnits::toString, LengthUnits::getValue));
+        }
+
+        @Override
+        public Enum getDefaultValue() {
+            return LengthUnits.METER;
+        }
+    };
 
 
+    public abstract Map<String, Double> getValuesOfUnits();
+
+    public abstract Enum getDefaultValue();
+}
+
+    
+       
+</code></pre>
+                <h5 class="mb-3">Example of Units class:</h5>
+                <pre><code class="java">
+public enum AreaUnits {
+
+    SQUARE_METER(1),
+    SQUARE_KILOMETER(1000000),
+    SQUARE_CENTIMETER(0.0001),
+    SQUARE_MILLIMETER(0.000001),
+    SQUARE_MICROMETER(0.000000000001),
+    HECTARE(10000),
+    SQUARE_MILE(2589990),
+    SQUARE_YARD(0.83612736),
+    SQUARE_FOOT(0.09290304),
+    SQUARE_INCH(0.00064516),
+    ACRE(4046.8564224);
+
+    private double value;
+
+    AreaUnits(double value) {
+        this.value = value;
+    }
+
+    public double getValue() {
+        return value;
+    }
+}
+
+                    </code></pre>
+
+                <h5 class="mb-3">Unit Factory class:</h5>
+                <pre><code class="java">
+package net.coffeecoding.factory;
+
+import net.coffeecoding.measures.Measures;
+import java.util.*;
+
+public class UnitFactory {
+
+    private double quantity;
+    private String measure;
+    private String unit;
+
+    private List<String> measures;
+    private Map<String, Double> unitsOfMeasure;
+    private Map<String, Double> calculatedUnitsOfMeasure;
+
+    public UnitFactory(double quantity, String measure, String unit) {
+
+        this.quantity = quantity;
+        this.measure = measure;
+        this.unit = unit;
+
+        measures = new ArrayList<>();
+        for (Measures measuresConstant : Measures.values()) {
+            measures.add(measuresConstant.toString());
+        }
+
+        calculateUnit(quantity, measure, unit);
+    }
+
+    private void calculateUnit(double quantity, String measure, String unit) {
+        this.quantity = quantity;
+        this.measure = measure;
+        this.unit = unit;
+
+        try {
+            unitsOfMeasure = Measures.valueOf(measure).getValuesOfUnits();
+            calculatedUnitsOfMeasure = new HashMap<>();
+            Double temp = unitsOfMeasure.get(unit) * quantity;
+            for (String key : unitsOfMeasure.keySet()) {
+                calculatedUnitsOfMeasure.put(key, temp / unitsOfMeasure.get(key));
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Bad unit of measure");
+        }
+    }
+
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+        calculateUnit(quantity, measure, unit);
+    }
+
+    public void setMeasure(String measure) {
+        this.measure = measure;
+        unit = Measures.valueOf(measure).getDefaultValue().toString();
+        calculateUnit(quantity, measure, unit);
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+        calculateUnit(quantity, measure, unit);
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public String getMeasure() {
+        return measure;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public List<String> getMeasures() {
+        return measures;
+    }
+
+    public List<String> getUnitsOfMeasure() {
+        List<String> unitsOfMeasureList = new ArrayList<>();
+        for (String key : unitsOfMeasure.keySet()) {
+            unitsOfMeasureList.add(key);
+        }
+
+
+        return unitsOfMeasureList;
+    }
+
+    public Map<String, Double> getCalculatedUnitsOfMeasure() {
+        return calculatedUnitsOfMeasure;
+    }
+
+    @Override
+    public String toString() {
+        return "UnitFactory{" +
+                "quantity=" + quantity +
+                ", measure='" + measure + '\'' +
+                ", unit='" + unit + '\'' +
+                ", measures=" + measures +
+                ", unitsOfMeasure=" + unitsOfMeasure +
+                ", calculatedUnitsOfMeasure=" + calculatedUnitsOfMeasure +
+                '}';
+    }
+}
+
+
+                    </code></pre>
+                <h5 class="mb-3">Units Controller class:</h5>
+                <pre><code class="java">
+package net.coffeecoding.controller;
+
+import net.coffeecoding.factory.UnitFactory;
+import net.coffeecoding.measures.Measures;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.PostConstruct;
+import java.util.*;
+
+@Controller
+public class UnitsController {
+
+    private UnitFactory unitFactory;
+
+    @PostConstruct
+    private void init() {
+        unitFactory = new UnitFactory(5, "Mass", "TON");
+    }
+
+    @GetMapping("/error")
+    public String showErrorPage() {
+        return "error-page";
+    }
+
+    @GetMapping("/demo")
+    public String showMainPage() {
+        return "units-form";
+    }
+
+    @RequestMapping(value = "/measure", consumes = MediaType.TEXT_PLAIN_VALUE, method = RequestMethod.POST)
+    public ResponseEntity<String> getSelectedMeasure(@RequestBody String selectedMeasure) {
+        unitFactory.setMeasure(selectedMeasure);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/unit", consumes = MediaType.TEXT_PLAIN_VALUE, method = RequestMethod.POST)
+    public ResponseEntity<String> getSelectedUnit(@RequestBody String selectedUnit) {
+        unitFactory.setUnit(selectedUnit);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/quantity", consumes = MediaType.TEXT_PLAIN_VALUE, method = RequestMethod.POST)
+    public ResponseEntity<String> getSelectedQuantity(@RequestBody String quantity) {
+        if (quantity.equals("")){
+            unitFactory.setQuantity(1);
+        }else {
+            unitFactory.setQuantity(Integer.parseInt(quantity));
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/unit-model", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity<UnitFactory> test() {
+        return new ResponseEntity<>(unitFactory, HttpStatus.OK);
+    }
+}
+
+                     </code></pre>
+
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+                <script>
+                    hljs.initHighlightingOnLoad();
+                </script>
             </div>
         </div>
 
